@@ -54,32 +54,28 @@ def quiz():
 
 
     flash = tkinter.Tk() # create new GUI for flash card interface
-
     Label(flash, text="Flash Cards").grid(column=1, row=0)
     Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
-
-    def createFlash():
-        Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
-
     def back():
         global c
         c -= 1
-        createFlash()
+        Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
         return c
 
     def next():
         try:
             global c
             c += 1
-            createFlash()
+            Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
             return c
         except:
             c = 0
-            createFlash()
+            Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
             return c
 
     Button(flash, text="Next", command=next).grid(column=2, row=3)
     Button(flash, text="Back", command=back).grid(column=0, row=3)
+
 
     flash.mainloop()
 

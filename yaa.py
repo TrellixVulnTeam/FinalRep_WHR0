@@ -1,21 +1,22 @@
-# import Tkinter
+#import Tkinter
 import sys
-
 print(sys.version)
 print(sys.executable)
 from tkinter import *
+from tkinter import ttk
 from tkinter import filedialog
 from tkinter import messagebox
 import tkinter.scrolledtext as tkst
 import tkinter.filedialog
 
+
+
 pad = tkinter.Tk()  # creates new GUI and all code between here and pad.mainloop() control that GUI
 textPad = tkst.ScrolledText(pad, width=100, height=80)
 
-
 # Menu functions
 
-# Open function
+    # Open function
 
 def open_command():
     file = filedialog.askopenfile(parent=pad, mode='rb', title='Select a file')
@@ -25,7 +26,6 @@ def open_command():
         file.close()
 
     # Save file
-
 
 def fuckPython():
     file = filedialog.asksaveasfile(mode='w')
@@ -37,64 +37,31 @@ def fuckPython():
 
     # create quiz
 
-
 dicktickler = {}
 """side note about this function: it won't display the text in the editor when you open it but it does open it """
 
-c = 0
 def quiz():
-
     file = filedialog.askopenfile(parent=pad, mode='r', title='Select a file')
     if file != None:
-        for i, line in enumerate(file):
+
+
+
+        for i,line in enumerate(file):
             if '#' and ':' in line:
-                dicktickler[str(line[line.index("#") + 1: line.index(':')])] = line[line.index(':') + 1:]
+                dicktickler[str(line[line.index("#")+1 : line.index(':')])] = line[line.index(':')+1:]
                 print(i, line)
-    print(dicktickler) # This is just for us to see if it is still working correctly
+    print(dicktickler)
 
-
-    flash = tkinter.Tk() # create new GUI for flash card interface
-
-    Label(flash, text="Flash Cards").grid(column=1, row=0)
-    Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
-
-    def createFlash():
-        Label(flash, text=list(dicktickler.keys())[c], padx=100, pady=100).grid(column=1, row=1)
-
-    def back():
-        global c
-        c -= 1
-        createFlash()
-        return c
-
-    def next():
-        try:
-            global c
-            c += 1
-            createFlash()
-            return c
-        except:
-            c = 0
-            createFlash()
-            return c
-
-    Button(flash, text="Next", command=next).grid(column=2, row=3)
-    Button(flash, text="Back", command=back).grid(column=0, row=3)
-
-    flash.mainloop()
 
 def exit_command():
     if messagebox.askokcancel("Quit", "Do you really want to quit?"):
         pad.destroy()
 
-
 def about_command():
     label = messagebox.showinfo("About", "Just Another TextPad \n Copyright \n No rights left to reserve")
 
-
 def dummy():
-    print("I am a Dummy Command, I will be removed in the next step")
-
+        print("I am a Dummy Command, I will be removed in the next step")
 
 menu = Menu(pad)
 pad.config(menu=menu)
@@ -110,5 +77,8 @@ helpmenu = Menu(menu)
 menu.add_cascade(label="Help", menu=helpmenu)
 helpmenu.add_command(label="About...", command=about_command)
 textPad.pack()
+
+
+
 
 pad.mainloop()
